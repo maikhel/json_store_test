@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+questionnaire = Questionnaire.new
+questionnaire.question1 = "How are you?"
+questionnaire.question2 = "How old are you?"
+questionnaire.save!
