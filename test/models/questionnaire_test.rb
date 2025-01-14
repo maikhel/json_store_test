@@ -13,7 +13,9 @@ class QuestionnaireTest < ActiveSupport::TestCase
     assert_equal questionnaire.question2, "How old are you?"
 
     assert_nothing_raised { JSON.parse(questionnaire.questions_for_database) }
-    questions = JSON.parse(questionnaire.questions_for_database)
-    assert_instance_of(Hash, JSON.parse(questions))
+    assert_instance_of(Hash, JSON.parse(questionnaire.questions_for_database))
+
+    assert_equal questionnaire.id,
+      Questionnaire.where("questions ->> 'question1' = 'How are you?'").first.id
   end
 end
