@@ -9,7 +9,11 @@ class QuestionnaireTest < ActiveSupport::TestCase
     questionnaire.save!
 
     questionnaire.reload
-    assert questionnaire.question1, "How are you?"
-    assert questionnaire.question2, "How old are you?"
+    assert_equal questionnaire.question1, "How are you?"
+    assert_equal questionnaire.question2, "How old are you?"
+
+    assert_nothing_raised { JSON.parse(questionnaire.questions_for_database) }
+    questions = JSON.parse(questionnaire.questions_for_database)
+    assert_instance_of(Hash, JSON.parse(questions))
   end
 end
